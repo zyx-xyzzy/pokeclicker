@@ -5,8 +5,9 @@
  * Main game class.
  */
 class Game {
-    interval;
     public static achievementCounter = 0;
+
+    private worker: Worker;
 
     // Features
 
@@ -94,7 +95,13 @@ class Game {
         if (player.starter() === GameConstants.Starter.None) {
             StartSequenceRunner.start();
         }
-        this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
+        console.log(`[${GameConstants.formatDate(new Date())}] %cStarting Web Worker`, 'color:#8e44ad;font-weight:900;');
+        const blob = new Blob([`onmessage = (e) => { setInterval(() => { postMessage('tick'); }, ${GameConstants.TICK_TIME}); }`]);
+        const blobURL = window.URL.createObjectURL(blob);
+
+        this.worker = new Worker(blobURL);
+        this.worker.onmessage = (e) => this.gameTick();
+        this.worker.postMessage('tick');
     }
 
     stop() {
