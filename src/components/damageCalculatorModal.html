@@ -62,34 +62,36 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                         </select>
                     </div>
                 </div>
-                <div data-bind="text: `Total Damage: ${Math.round(DamageCalculator.observableTotalDamage()).toLocaleString('en-US')}`"> </div>
-                <div class="d-flex">
-                    <!-- ko foreach: DamageCalculator.observableTypeDamageArray -->
-                    <div class="type-damage-bar"
-                        data-bind="style: {'flex-grow': $data,
-                                            'background-color': '#' + TypeHelper.typeColorsLocked[$index()]
-                                          },
-                                    tooltip: {title: `${PokemonType[$index()]}: ${Math.round($data).toLocaleString('en-US')}`,
-                                              trigger: 'hover',
-                                              placement:'bottom'
+                <!-- ko if: !!visibleModals().find(m => m == 'damageCalculatorModal') -->
+                    <div data-bind="text: `Total Damage: ${Math.round(DamageCalculator.observableTotalDamage()).toLocaleString('en-US')}`"> </div>
+                    <div class="d-flex">
+                        <!-- ko foreach: DamageCalculator.observableTypeDamageArray -->
+                        <div class="type-damage-bar"
+                            data-bind="style: {'flex-grow': $data,
+                                                'background-color': '#' + TypeHelper.typeColorsLocked[$index()]
                                             },
-                                    click: () => {DamageCalculator.detailType($index())}"
-                    ></div>
-                    <!-- /ko -->
-                </div>
-                <div class="form-group text-left mt-3">
-                    <label>Type Detail</label>
-                    <select autocomplete="off" data-bind="value: DamageCalculator.detailType">
-                        <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
-                        <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                                        tooltip: {title: `${PokemonType[$index()]}: ${Math.round($data).toLocaleString('en-US')}`,
+                                                trigger: 'hover',
+                                                placement:'bottom'
+                                                },
+                                        click: () => {DamageCalculator.detailType($index())}"
+                        ></div>
                         <!-- /ko -->
-                    </select>
-                    <!-- ko if: DamageCalculator.detailType() != PokemonType.None -->
-                    <span class="float-right" data-bind="text: `${PokemonType[DamageCalculator.detailType()]} Damage: ${Math.round(DamageCalculator.observableTypeDamageArray()[DamageCalculator.detailType()]).toLocaleString('en-US')}`"></span>
-                    <!-- /ko -->
-                </div>
+                    </div>
+                    <div class="form-group text-left mt-3">
+                        <label>Type Detail</label>
+                        <select autocomplete="off" data-bind="value: DamageCalculator.detailType">
+                            <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
+                            <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                            <!-- /ko -->
+                        </select>
+                        <!-- ko if: DamageCalculator.detailType() != PokemonType.None -->
+                        <span class="float-right" data-bind="text: `${PokemonType[DamageCalculator.detailType()]} Damage: ${Math.round(DamageCalculator.observableTypeDamageArray()[DamageCalculator.detailType()]).toLocaleString('en-US')}`"></span>
+                        <!-- /ko -->
+                    </div>
+                <!-- /ko -->
             </div>
-            <div data-bind="if: DamageCalculator.detailType() != PokemonType.None">
+            <div data-bind="if: !!visibleModals().find(m => m == 'damageCalculatorModal') && DamageCalculator.detailType() != PokemonType.None">
                 <table id="damageCalcTypeDetailTable" class="table table-striped table-hover table-sm m-0">
                     <thead>
                         <tr>
