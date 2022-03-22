@@ -1,5 +1,4 @@
 ///<reference path="./SubRegion.ts"/>
-///<reference path="../achievements/NullRequirement.ts"/>
 
 class SubRegions {
     public static list: Record<GameConstants.Region, SubRegion[]> = {};

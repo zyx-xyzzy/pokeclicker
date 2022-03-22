@@ -1,3 +1,5 @@
+///<reference path="../shop/Shop.ts"/>
+
 class TownShop extends Shop {
     constructor(
         public items: Item[],

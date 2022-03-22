@@ -1,5 +1,6 @@
 /// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
 /// <reference path="../declarations/party/Category.d.ts"/>
+///<reference path="utilities/Preload.ts"/>
 
 class App {
 

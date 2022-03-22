@@ -1,11 +1,18 @@
 /* eslint-disable array-bracket-newline */
-///<reference path="../achievements/GymBadgeRequirement.ts"/>
-///<reference path="../achievements/OneFromManyRequirement.ts"/>
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="NPC.ts"/>
 ///<reference path="KantoBerryMasterNPC.ts"/>
 ///<reference path="ProfOakNPC.ts"/>
 ///<reference path="RoamerNPC.ts"/>
+///<reference path="../achievements/RouteKillRequirement.ts"/>
+///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
+///<reference path="../shop/TownShop.ts"/>
+///<reference path="../shop/BerryMasterShop.ts"/>
+///<reference path="../items/Item.ts"/>
+///<reference path="../items/PokeballItem.ts"/>
+///<reference path="../items/EnergyRestore.ts"/>
+///<reference path="../pokemons/PokemonList.ts"/>
+///<reference path="../dungeons/Dungeon.ts"/>
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],

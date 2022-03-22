@@ -1,3 +1,4 @@
+///<reference path="../towns/Town.ts"/>
 class Preload {
     static itemsToLoad = [];
     static itemsLoaded = [];

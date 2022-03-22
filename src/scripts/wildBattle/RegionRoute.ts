@@ -4,7 +4,7 @@ class RegionRoute {
         public region: GameConstants.Region,
         public number: number,
         public pokemon: RoutePokemon,
-        public requirements: (OneFromManyRequirement | Requirement)[] = [],
+        public requirements: Requirement[] = [],
         public orderNumber?: number
     ) {
         this.orderNumber = orderNumber || number;

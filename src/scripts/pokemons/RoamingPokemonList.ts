@@ -1,6 +1,5 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="../achievements/SubregionRequirement.ts"/>
-///<reference path="../achievements/OneFromManyRequirement.ts"/>
 ///<reference path="../subRegion/SubRegions.ts"/>
 
 class RoamingPokemonList {

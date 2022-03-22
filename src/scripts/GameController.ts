@@ -1,6 +1,8 @@
 /**
  * Class which controls the UI of the game.
  */
+///<reference path="pokedex/PokedexHelper.ts"/>
+
 class GameController {
     static applyRouteBindings() {
         $('path, rect').hover(function () {
