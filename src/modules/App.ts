@@ -1,9 +1,9 @@
-/// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
-/// <reference path="../declarations/party/Category.d.ts"/>
-///<reference path="utilities/Preload.ts"/>
+import BadgeCase from './DataStore/BadgeCase';
+import * as GameConstants from './GameConstants';
+import PokemonCategories from './party/Category';
+import Preload from './utilities/Preload';
 
-class App {
-
+export default class App {
     static readonly debug = false;
     static game: Game;
 

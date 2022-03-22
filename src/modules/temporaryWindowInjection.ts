@@ -38,6 +38,10 @@ import { SpriteCredits, CodeCredits } from './Credits';
 import * as modalUtils from './utilities/Modal';
 import PokemonCategories from './party/Category';
 import Requirements from './requirements/inject';
+import Preload from './utilities/Preload';
+import BadgeCaseController from './badgeCase/BadgeCaseController';
+import StartSequenceRunner from './StartSequenceRunner';
+import TypeHelper from './types/TypeHelper';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -82,4 +86,8 @@ Object.assign(<any>window, {
     CodeCredits,
     modalUtils,
     PokemonCategories,
+    Preload,
+    BadgeCaseController,
+    StartSequenceRunner,
+    TypeHelper,
 });

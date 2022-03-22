@@ -1,5 +1,6 @@
-///<reference path="../towns/Town.ts"/>
-class Preload {
+import * as GameConstants from '../GameConstants';
+
+export default class Preload {
     static itemsToLoad = [];
     static itemsLoaded = [];
     static itemsErrored = [];
@@ -26,15 +27,15 @@ class Preload {
 
         // Update the progress bar
         const progressBarEl = document.getElementById('preload-progress-bar');
-        progressBarEl.style.width = `${(loaded + errored) / toLoad * 100}%`;
+        progressBarEl.style.width = `${((loaded + errored) / toLoad) * 100}%`;
 
         // Update the text
         const progressTextEl = document.getElementById('preload-progress-text');
-        progressTextEl.innerText = `${loaded +  errored} / ${toLoad}`;
+        progressTextEl.innerText = `${loaded + errored} / ${toLoad}`;
     }
 
     public static hideSplashScreen(fast = false) {
-        $('#game').removeClass('loading');
+        document.getElementById('game').classList.remove('loading');
         if (fast) {
             $('.loader').hide();
         } else {
@@ -43,10 +44,11 @@ class Preload {
     }
 
     public static load(skipWait = false): Promise<void> {
+        // eslint-disable-next-line no-console
         console.log(`[${GameConstants.formatDate(new Date())}] %cPreloading Images..`, 'color:#8e44ad;font-weight:900;');
         if (skipWait) {
-            return new Promise(resolve => {
-                //If you want to skip waiting, resolve immediately
+            return new Promise((resolve) => {
+                // If you want to skip waiting, resolve immediately
                 resolve();
                 Preload.loadTowns();
                 Preload.loadUndergroundItems();
@@ -54,51 +56,52 @@ class Preload {
                 // Preload.loadPokemon(),
                 Preload.hideSplashScreen(true);
             });
-        } else {
-            return new Promise(resolve => {
-                // Incase something is taking too long to load
-                const forceLoad = setTimeout(() => {
-                    console.log(`[${GameConstants.formatDate(new Date())}] %cPreloading images taking too long, Skipping..`, 'color:#c0392b;font-weight:900;');
-                    resolve();
-                }, GameConstants.MAX_LOAD_TIME);
-
-                Promise.all([
-                    Preload.loadTowns(),
-                    Preload.loadUndergroundItems(),
-                    // Preload.loadMap(),
-                    // Preload.loadPokemon(),
-                    Preload.minimumTime(),
-                ]).then(() => {
-                    clearTimeout(forceLoad);
-                    // Give the progress bar a little bit of time to finish the animation
-                    setTimeout(() => {
-                        resolve();
-                    }, 600);
-                }).catch((reason => {
-                    console.log(`[${GameConstants.formatDate(new Date())}] %cPreload images failed..`, 'color:#c0392b;font-weight:900;');
-                    console.error('Preload images failed:', reason);
-                    clearTimeout(forceLoad);
-                    resolve();
-                }));
-            });
         }
+
+        return new Promise((resolve) => {
+            // Incase something is taking too long to load
+            const forceLoad = setTimeout(() => {
+                console.log(`[${GameConstants.formatDate(new Date())}] %cPreloading images taking too long, Skipping..`, 'color:#c0392b;font-weight:900;');
+                resolve();
+            }, GameConstants.MAX_LOAD_TIME);
+
+            Promise.all([
+                Preload.loadTowns(),
+                Preload.loadUndergroundItems(),
+                // Preload.loadMap(),
+                // Preload.loadPokemon(),
+                Preload.minimumTime(),
+            ]).then(() => {
+                clearTimeout(forceLoad);
+                // Give the progress bar a little bit of time to finish the animation
+                setTimeout(() => {
+                    resolve();
+                }, 600);
+            }).catch(((reason) => {
+                // eslint-disable-next-line no-console
+                console.log(`[${GameConstants.formatDate(new Date())}] %cPreload images failed..`, 'color:#c0392b;font-weight:900;');
+                console.error('Preload images failed:', reason);
+                clearTimeout(forceLoad);
+                resolve();
+            }));
+        });
     }
 
     private static loadTowns() {
         const p = Array<Promise<void>>();
-        for (const name in TownList) {
+        Object.keys(TownList).forEach((name) => {
             // Skip unreleased towns unless a feature flag has enabled them
             if (
                 !(<any>window).featureFlags?.preloadUnreleasedTowns && TownList[name].region > GameConstants.MAX_AVAILABLE_REGION
             ) {
-                continue;
+                return;
             }
             // Skip fake towns that exist for the Elite
             if (name.includes('Elite') || name.includes('Champion')) {
-                continue;
+                return;
             }
             Preload.itemLoading(name);
-            p.push(new Promise<void>(resolve => {
+            p.push(new Promise<void>((resolve) => {
                 const img = new Image();
                 img.onload = () => {
                     Preload.itemLoaded(`town-${name}`);
@@ -111,8 +114,7 @@ class Preload {
                 };
                 img.src = `assets/images/towns/${name}.png`;
             }));
-
-        }
+        });
         return Promise.all(p);
     }
 
@@ -120,7 +122,7 @@ class Preload {
         const p = Array<Promise<void>>();
         for (let i = 1; i <= GameConstants.MaxIDPerRegion[GameConstants.MAX_AVAILABLE_REGION]; i++) {
             Preload.itemLoading(i);
-            p.push(new Promise<void>(resolve => {
+            p.push(new Promise<void>((resolve) => {
                 const img = new Image();
                 img.onload = () => {
                     Preload.itemLoaded(i);
@@ -133,16 +135,15 @@ class Preload {
                 };
                 img.src = `assets/images/pokemon/${i}.png`;
             }));
-
         }
         return Promise.all(p);
     }
 
     private static loadUndergroundItems() {
         const p = Array<Promise<void>>();
-        UndergroundItem.list.forEach(item => {
+        UndergroundItem.list.forEach((item) => {
             Preload.itemLoading(item.id);
-            p.push(new Promise<void>(resolve => {
+            p.push(new Promise<void>((resolve) => {
                 const img = new Image();
                 img.onload = () => {
                     Preload.itemLoaded(item.id);
@@ -160,7 +161,7 @@ class Preload {
     }
 
     private static minimumTime() {
-        return new Promise<void>(resolve => {
+        return new Promise<void>((resolve) => {
             setTimeout(() => {
                 resolve();
             }, GameConstants.MIN_LOAD_TIME);

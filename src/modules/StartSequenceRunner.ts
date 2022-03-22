@@ -1,12 +1,12 @@
-class StartSequenceRunner {
+import * as GameConstants from './GameConstants';
 
+export default class StartSequenceRunner {
     public static starterPicked: GameConstants.Starter = GameConstants.Starter.None
     public static noStarterCount = 0;
 
     public static start() {
         App.game.gameState = GameConstants.GameState.paused;
         $('#startSequenceModal').modal('show');
-
     }
 
     public static pickStarter(s: GameConstants.Starter) {
