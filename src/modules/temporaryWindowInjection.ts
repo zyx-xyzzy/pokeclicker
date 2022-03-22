@@ -37,6 +37,7 @@ import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
 import * as modalUtils from './utilities/Modal';
 import PokemonCategories from './party/Category';
+import Requirements from './requirements/inject';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -74,6 +75,7 @@ Object.assign(<any>window, {
     Challenges,
     LevelType,
     levelRequirements,
+    ...Requirements,
     ...WalletClasses,
     GenericProxy,
     SpriteCredits,
