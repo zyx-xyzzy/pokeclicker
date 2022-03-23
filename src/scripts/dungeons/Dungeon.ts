@@ -1,14 +1,14 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="DungeonBossPokemon.ts"/>
-///<reference path="../achievements/GymBadgeRequirement.ts"/>
-///<reference path="../achievements/MultiRequirement.ts"/>
+///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
 ///<reference path="../gym/GymPokemon.ts"/>
 
 interface EnemyOptions {
     weight?: number,
-    requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
+    requirement?: Requirement,
     reward?: Amount,
 }
 
@@ -20,7 +20,7 @@ interface DetailedPokemon {
 interface Loot {
     loot: ItemNameType | PokemonNameType | UndergroundItemNameType | BerryNameType,
     weight?: number,
-    requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
+    requirement?: Requirement,
     amount?: number,
 }
 

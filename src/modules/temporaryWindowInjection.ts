@@ -47,6 +47,7 @@ import OakItems from './oakItems/OakItems';
 import BoughtOakItem from './oakItems/BoughtOakItem';
 import OakItemController from './oakItems/OakItemController';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
+import Requirements from './requirements/inject';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -100,4 +101,5 @@ Object.assign(<any>window, {
     BoughtOakItem,
     OakItemController,
     OakItemLoadouts,
+    ...Requirements,
 });
