@@ -1,0 +1,28 @@
+<div class="modal noselect fade" id="speedrunModal" tabindex="-1" role="dialog" aria-labelledby="speedrunModal">
+  <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Speedrun Options</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3>Type</h3>
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary btn-block active">
+            <input type="radio" name="speedrunType" id="speedrunType0" value="0" onchange="App.game.speedrun.type(this.value)" checked> Tutorial
+          </label>
+          <label class="btn btn-secondary btn-block">
+            <input type="radio" name="speedrunType" id="speedrunType1" value="1" onchange="App.game.speedrun.type(this.value)"> Kanto Champion
+          </label>
+          <label class="btn btn-secondary btn-block">
+            <input type="radio" name="speedrunType" id="speedrunType2" value="2" onchange="App.game.speedrun.type(this.value)"> 151 Pokemon
+          </label>
+        </div>
+        <br/>
+        <button class="btn btn-primary btn-block" data-dismiss="modal">Done!</button>
+      </div>
+    </div>
+  </div>
+</div>
