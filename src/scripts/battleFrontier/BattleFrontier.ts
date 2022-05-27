@@ -21,7 +21,7 @@ class BattleFrontier implements Feature {
         if (!App.game.battleFrontier.canAccess()) {
             return Notifier.notify({
                 title: '[Battle Frontier]',
-                message: 'You must progress further in the "Mystery of Deoxys" quest before you can participate',
+                message: 'You must progress further in the "Mystery of Deoxys" quest before you can participate.',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
